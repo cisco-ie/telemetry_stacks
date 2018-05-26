@@ -5,7 +5,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    build: kafka-docker/.
+    build: ./kafka-docker
     ports:
       - "9092"
     environment:
