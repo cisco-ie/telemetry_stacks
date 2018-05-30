@@ -10,5 +10,5 @@ services:
     ports:
         - 8888:8888
     volumes:
-        - opentsdb:/home/jovyan/telemetry
+        - ./opentsdb:/home/jovyan/telemetry
     command: start-notebook.sh --NotebookApp.password='sha1:61c254b07ae6:ca68942bf64da7e00f9ad9ea2ed89a51997df512'
