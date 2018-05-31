@@ -11,14 +11,14 @@ import time
 
 
 class TelemetryIOSXE():
-    def __init__(self, host, username='cisco', password='cisco', port=830,
-                 verbose=True, delete_after=None):
+    def __init__(self, host, username='admin', password='Cisco1234!', port=830,
+                 verbose=False, delete_after=None):
         self.host = host
         self.username = username
         self.password = password
         self.port = port
         if verbose:
-            self.logging()
+            logging()
         self.delete_after = delete_after
         self.connect()
         self.kafka_connect()
@@ -41,13 +41,12 @@ class TelemetryIOSXE():
 
     def kafka_connect(self):
         self.producer = KafkaProducer(
-            bootstrap_servers='pnda13.gspie.lab:9092, pnda14.gspie.lab, pnda15.gspie.lab',
+            bootstrap_servers='localhost:9092',
             value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
     def kafka_callback(self, notif):
         data = json.loads(json.dumps(jxmlease.parse(notif.xml)))
-        print(data)
-        #self.producer.send('telemetryxe', data['notification'])
+        self.producer.send('telemetryxe', data['notification'])
 
     def errback(self, notif):
         pass
@@ -66,14 +65,15 @@ class TelemetryIOSXE():
                                    unknown_host_cb=self.unknown_host_cb)
 
     def establish_sub(self, xpath, period=None, dampening_period=None):
-        self.sub = self.man.establish_subscription(
+        sub = self.man.establish_subscription(
             self.kafka_callback,
             self.errback,
             xpath=xpath,
             period=period,
             dampening_period=dampening_period)
-        print('Subscription Result : %s' % self.sub.subscription_result)
-        print('Subscription Id     : %d' % self.sub.subscription_id)
+        print('Subscription Result : %s' % sub.subscription_result)
+        print('Subscription Id     : %d' % sub.subscription_id)
+        return sub
 
     def wait_for(self):
         if self.delete_after:
@@ -91,8 +91,12 @@ class TelemetryIOSXE():
 
     def multi_sub(self, xpath_list):
         signal.signal(signal.SIGINT, self.sigint_handler)
+        subs = {}
+        counter = 1
         for item in xpath_list:
-            self.establish_sub(**item)
+            subs[counter] = self.establish_sub(**item)
+            counter = counter + 1
+        print(subs)
         self.wait_for()
 
     def logging(self):
@@ -103,16 +107,15 @@ class TelemetryIOSXE():
             logger.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
-    telem = TelemetryIOSXE(host='10.20.0.52')
-    xpath = '/process-cpu-ios-xe-oper:cpu-usage/process-cpu-ios-xe-oper:cpu-utilization/process-cpu-ios-xe-oper:five-seconds'
+    telem = TelemetryIOSXE(host='10.10.20.30')
+    #xpath = '/process-cpu-ios-xe-oper:cpu-usage/process-cpu-ios-xe-oper:cpu-utilization/process-cpu-ios-xe-oper:five-seconds'
     #xpath = '/process-memory-ios-xe-oper:memory-statistics'
     #xpath = '/if:interfaces-state/if:interface/if:statistics'
+    #xpath = '/bgp-ios-xe-oper:bgp-state-data/bgp-ios-xe-oper:neighbors'
     #xpath = '/memory-statistics/memory-statistic[name="Processor"]'
-    #xpath = '/bgp-ios-xe-oper:bgp-state-data/bgp-ios-xe-oper:address-families'
-    #xpath = '/bgp-state-data/neighbors/address-families/address-family/activities'
-    xpath = '/bgp-state-data'
-    telem.single_sub(xpath, period=5000)
-    #xpaths_list = [
-    #    {"xpath": '/process-cpu-ios-xe-oper:cpu-usage/process-cpu-ios-xe-oper:cpu-utilization/process-cpu-ios-xe-oper:five-seconds', "period": 5000},
-    #    {"xpath": '/if:interfaces-state/if:interface/if:statistics', "period": 30000}]
-    #telem.multi_sub(xpaths_list)
+    #telem.single_sub(xpath, period=5000)
+    xpaths_list = [
+        {"xpath": '/process-cpu-ios-xe-oper:cpu-usage/process-cpu-ios-xe-oper:cpu-utilization/process-cpu-ios-xe-oper:five-seconds', "period": 1000},
+        {"xpath": '/if:interfaces-state/if:interface/if:statistics', "period": 1000},
+        {"xpath": '/bgp-state-data', "period": 1000}]
+    telem.multi_sub(xpaths_list)
