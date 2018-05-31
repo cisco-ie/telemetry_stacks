@@ -35,7 +35,9 @@ For this setup, we are using Apache Spark as the transformer and OpenTSDB as the
 
 ## Setting up Telemetry on XE
 
-Streming telemetry on XE uses NETCONF streaming. NETCONF Streaming is a feature added by Cisco to NETCONF in their custom Python client, [ncc](https://github.com/CiscoDevNet/ncc). Due to the fact they use NETCONF, only XML is supported in encoding.
+Streming telemetry on XE uses NETCONF streaming. NETCONF Streaming is a feature added by Cisco to NETCONF in their custom Python client, [ncc](https://github.com/CiscoDevNet/ncc). Due to the fact they use NETCONF, only XML is supported in encoding.  
+
+**Ensure that you start the databases first
 
 #### Configure Telemetry
 
