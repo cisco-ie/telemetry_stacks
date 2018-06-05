@@ -21,7 +21,7 @@ Running on the Ubuntu server are:
 ![environment](environment.png)
 
 ## Start the Databases
-**This step must happen!** For this setup, we are using Apache Spark as the transformer/loader and OpenTSDB as the time series database. 
+**This step must happen first!** For this setup, we are using Apache Spark as the transformer/loader and OpenTSDB as the time series database. 
 
 1. SSH into Ubuntu Server  
    ```bash
@@ -35,7 +35,7 @@ Running on the Ubuntu server are:
    ```
 
 ## Setting up Streaming Telemetry on IOS XE
-IOS XE exposes streaming telemetry via NETCONF using [IETF YANG Push](https://datatracker.ietf.org/doc/draft-ietf-netconf-yang-push/). This is a draft RFC which Cisco has added support for in a fork of [ncclient](https://github.com/CiscoDevNet/ncclient) and developed useful wrappers for via [ncc](https://github.com/CiscoDevNet/ncc). It can be used like a script or programatically with Python. Due to being NETCONF based, only XML is supported in the encoding.
+IOS XE exposes streaming telemetry via NETCONF using [IETF YANG Push / YANG Datastore Subscription](https://datatracker.ietf.org/doc/draft-ietf-netconf-yang-push/). This is a draft RFC which Cisco has added support for in a fork of [ncclient](https://github.com/CiscoDevNet/ncclient) and developed useful wrappers for via [ncc](https://github.com/CiscoDevNet/ncc). It can be used like a script or programatically with Python. Due to being NETCONF based, only XML is supported in the encoding.
 
 ### Configure Streaming Telemetry
 
@@ -110,7 +110,7 @@ First we will ensure that we are able to stream data, then direct the data to ou
 
 1. Navigate to http://10.10.20:25:8888 in a browser, the password is `cisco1234`
 
-2. Click on the folder `telemetry`
+2. Click on the folder [telemetry](http://10.10.20.25:8888/notebooks/telemetry/)
 
 3. Click on the file [Kafka_OTSDB_XE.ipynb](http://10.10.20.25:8888/notebooks/telemetry/Kafka_OTSDB_XE.ipynb)
 
