@@ -3,11 +3,11 @@
 In this tutorial you will learn how to configure streaming telemetry for IOS XE, IOS XR, and NX-OS, as well as setup collectors, transform/load the data into a time series database, and visualize it using Grafana.
 
 ## The Environment
-This environment consists of several devices and software components.
+This environment consists of several virtualized devices and software components.
 
-* CSR 1000v (IOS XE)
-* IOS XRv (IOS XR)
-* Cisco Nexus 9000v (NX-OS)
+* [CSR 1000v](https://developer.cisco.com/docs/ios-xe/#!developer-tooling-quick-start-guide/virtual-ios-xe-device-options) (IOS XE)
+* [IOS XRv](https://xrdocs.github.io/application-hosting/tutorials/iosxr-vagrant-quickstart) (IOS XR)
+* [Cisco Nexus 9000v](https://developer.cisco.com/docs/nx-os/#!developer-tooling/developer-tooling) (NX-OS)
 * Ubuntu Server
 
 Running on the Ubuntu server are:
