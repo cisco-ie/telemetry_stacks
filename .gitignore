@@ -1,3 +1,4 @@
 **/.DS_Store
 *.log
 opentsdb/.ipynb_checkpoints/**
+nexus-pipeline.bin
