@@ -160,4 +160,4 @@ First we will ensure that we are able to stream data, then direct the data to ou
 
 ## Conclusion
 
-Now that you have Streaming Telemetry working on IOS-XE, try making it work with NX-OS and IOS-XR using the learning labs and other guides as reference. This environment is meant for you to be able to play around with the different Cisco operating systems and create your own collectors for databases you use in your environment. 
+Now that you have Streaming Telemetry working on IOS XE, try making it work with NX-OS and IOS XR using the learning labs and other guides as reference. This environment is meant for you to be able to play around with the different Cisco operating systems and create your own collectors for databases you use in your environment. 
