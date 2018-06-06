@@ -1,6 +1,6 @@
 # Streaming Telemetry 101
 
-In this tutorial you will learn how to configure streaming telemetry for IOS XE, IOS XR, and NX-OS, as well as setup collectors, transform/load the data into a time series database, and visualize it using Grafana.
+In this tutorial you will learn how to configure streaming telemetry for IOS XE, as well as setup collectors, transform/load the data into a time series database, and visualize it using Grafana.
 
 ## The Environment
 This environment consists of several virtualized devices and software components.
@@ -9,6 +9,8 @@ This environment consists of several virtualized devices and software components
 * [IOS XRv](https://xrdocs.github.io/application-hosting/tutorials/iosxr-vagrant-quickstart) (IOS XR)
 * [Cisco Nexus 9000v](https://developer.cisco.com/docs/nx-os/#!developer-tooling/developer-tooling) (NX-OS)
 * Ubuntu Server
+
+***Note:** Streaming Telemetry on IOS XRv and Cisco Nexus 9000v are outside the scope of Streaming Telemetry 101, but there for you to to develop around in the Sandbox. 
 
 Running on the Ubuntu server are:
 
@@ -28,9 +30,19 @@ Running on the Ubuntu server are:
    # Password: Cisco1234!
    ssh telemetry@10.10.20.25
    ```
-2. Start the Docker Stacks  
+
+2. Download the latest code for the project
+
    ```bash
    cd telemetry_stacks
+   git pull
+   ```
+
+   
+
+1. Start the Docker Stacks from the directory `telemetry_stacks`
+
+   ```bash
    docker-compose -f docker-compose.yml -f docker-compose-opentsdb.yml up -d
    ```
 
@@ -143,3 +155,9 @@ First we will ensure that we are able to stream data, then direct the data to ou
 8. Change the `Metric` to `in-octets` and `Aggregator` to `last` and check the `Rate` checkbox
 
 9. Click the refresh icon on the top right of the box, you should now see data!
+
+
+
+## Conclusion
+
+Now that you have Streaming Telemetry working on IOS XE, try making it work with NX-OS and IOS XR using the learning labs and other guides as reference. This environment is meant for you to be able to play around with the different Cisco operating systems and create your own collectors for databases you use in your environment. 
