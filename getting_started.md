@@ -73,7 +73,7 @@ First we will ensure that we are able to stream data, then direct the data to ou
    # Password: Cisco1234!
    ssh telemetry@10.10.20.25
    ```
-2. Verify we are able to stream data by printing it to stdout.  
+2. Verify we are able to stream data by printing it to stdout. If it does not immediately work, wait a couple more seconds.  
    ```bash
    cd telemetry_stacks/consumers/xe/
    pipenv shell
@@ -120,13 +120,13 @@ First we will ensure that we are able to stream data, then direct the data to ou
 
 #### Start the Transformer
 
-1. Navigate to http://10.10.20:25:8888 in a browser, the password is `cisco1234`
+1. Navigate to http://10.10.20.25:8888 in a browser, the password is `cisco1234`
 
 2. Click on the folder [telemetry](http://10.10.20.25:8888/notebooks/telemetry/)
 
 3. Click on the file [Kafka_OTSDB_XE.ipynb](http://10.10.20.25:8888/notebooks/telemetry/Kafka_OTSDB_XE.ipynb)
 
-4. Click on the first tile, and click `run` on all the tiles but the last one that says `ssc.stop()`
+4. Click on the first tile, and click `Run` on the Jupyter command bar. Click on all the following tiles except for the last which which contains `ssc.stop()`.
 
    ** Make sure you do not click `run` on `ssc.stop`**
 
@@ -144,17 +144,17 @@ First we will ensure that we are able to stream data, then direct the data to ou
 
    ​	URL:  `http://opentsdb:4242`
 
-4. Click on `Save & Test`, if everything is working you should see a green box stating "Data source is working"
+4. Click on `Save & Test` at the bottom of the page. If everything is working you should see a green box stating "Data source is working."
 
-5. Click on the `+` icon and create a new dashboard
+5. Click on the `+` icon on the left toolbar and create a new dashboard
 
 6. Add a graph
 
-7. Click on the panel and press `e` on your keyboard.
+7. Click on the panel and select "Edit" or press `e` on your keyboard
 
 8. Change the `Metric` to `in-octets` and `Aggregator` to `last` and check the `Rate` checkbox
 
-9. Click the refresh icon on the top right of the box, you should now see data!
+9. Click the refresh icon on the top right of the box, you should now see a graph of your data!
 
 
 
